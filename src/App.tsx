@@ -1,20 +1,27 @@
-import { Header } from "./components/Header"
-import { Nav } from "./components/Nav"
-import { Card } from "./components/Card"
+import { Routes, Route } from "react-router-dom"
+import { routes } from "./routers"
 
 
 function App() {
 
   return (
-    <div className=" w-full h-full  flex ">
-      <Nav />
-      <div className="w-full">
-        <Header />
-        <div className="border h-full border-red-500">
-          <Card/>
-        </div>
-      </div>
-    </div>
+    <Routes>
+      {routes.public.map((route) => (
+        <Route key={route.id} path={route.path} element={route.element} />
+      ))}
+        {routes.private.map((route) => (
+            <Route key={route.id} path={route.path} element={route.element}>
+              {route.children &&
+                route.children.map((item) => (
+                    <Route
+                      key={item.id}
+                      path={item.path}
+                      element={item.element}
+                    />
+                ))}
+            </Route>
+        ))}
+    </Routes>
   )
 }
 

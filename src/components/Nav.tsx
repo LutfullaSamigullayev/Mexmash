@@ -7,27 +7,32 @@ import {
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import type { MenuProps } from 'antd';
 import { Button, Menu } from "antd";
-const items = [
+import { Link } from "react-router-dom";
+
+type MenuItem = Required<MenuProps>['items'][number];
+
+const items : MenuItem[] = [
   {
     key: "1",
     icon: <PieChartOutlined />,
-    label: "Asosiy",
+    label: <Link to={"/"}>Asosiy</Link>,
   },
   {
     key: "2",
     icon: <UserOutlined />,
-    label: "Foydalanuvchilar",
+    label: <Link to={"/users"}>Foydalanuvchilar</Link>,
   },
   {
     key: "3",
     icon: <ShoppingCartOutlined />,
-    label: "Maxsulotlar",
+    label: <Link to={"/products"}>Maxsulotlar</Link>,
   },
   {
     key: "4",
     icon: <ContainerOutlined />,
-    label: "Buyurtmalar",
+    label: <Link to={"/cart"}>Buyurtmalar</Link>,
   },
 ];
 export function Nav() {

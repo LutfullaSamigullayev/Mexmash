@@ -13,3 +13,7 @@
     @apply h-full;
   }
 }
+
+.ant-table-cell {
+  @apply p-1 !important
+}

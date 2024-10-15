@@ -1,0 +1,5 @@
+https://mexmash-dev-api.main-gate.appx.uz/api/v1
+backend url
+
+https://mexmash-dev-api.main-gate.appx.uz/api/docs
+api lar
