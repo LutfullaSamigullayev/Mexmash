@@ -1,11 +1,14 @@
 import { Button, Select, Space, Input } from "antd";
-import { GlobalOutlined, SunOutlined } from "@ant-design/icons";
+import { GlobalOutlined, SunOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Dispatch } from "redux"; // Redux dispatch uchun
 import { useDispatch } from "react-redux"; // Redux dispatch uchun hook
 import { setSearch } from "@/redux/slices/searchSlice"; // O'zgaruvchi yo'lini moslashtiring
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
   const dispatch: Dispatch = useDispatch(); // Redux dispatch
+  const navigate = useNavigate();
+
 
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
@@ -17,8 +20,15 @@ export function Header() {
     dispatch(setSearch(value));
   };
 
+  const logout = () => {
+    localStorage.clear();
+    return navigate("/login");
+  };
+
   return (
-    <div className="w-full flex justify-between p-3">
+
+
+    <div className="w-full flex justify-between p-3 pl-7 shadow-sm">
       <Search
         placeholder="Izlash..."
         allowClear
@@ -54,6 +64,9 @@ export function Header() {
             className="w-8 h-8 rounded-full"
           />
         </a>
+        <Button onClick={logout} type="primary">
+          <LogoutOutlined />
+        </Button>
       </div>
     </div>
   );

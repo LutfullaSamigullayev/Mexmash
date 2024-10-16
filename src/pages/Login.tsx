@@ -1,44 +1,36 @@
 import { Button, Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 // import { AxiosResponse } from 'axios';
-// import { User} from '@/types'; 
+// import { User} from '@/types';
 import { useNavigate } from "react-router-dom";
 import { Axios } from "@/lib/axios";
 
-
 export function Login() {
-
   type LoginValues = {
     login: string;
     password: string;
-  }
+  };
   const navigate = useNavigate();
-
 
   const onFinish = async (values: LoginValues) => {
     try {
-      const userpost = await Axios.post(
-        `/api/v1/admin/login`, {username: values.login, password: values.password}
-      );
-      console.log(userpost.data.data.refresh_token)
-      console.log(userpost.data.data.access_token)
+      const userpost = await Axios.post(`/api/v1/admin/login`, {
+        username: values.login,
+        password: values.password,
+      });
+      const data = userpost.data;
 
+      localStorage.setItem("refresh_token", data.data.refresh_token);
+      localStorage.setItem("access_token", data.data.access_token);
 
-      const data = userpost.data
-
-      // console.log(data.data.refresh_token)
-      localStorage.setItem('refresh_token', data.data.refresh_token)
-    navigate("/");
-
-  }
-  catch (error: any) {
-    console.error("An error occurred while fetching user data:", error);
-  }
-
-}
-const onFinishFailed = (errorInfo : any) => {
-  console.log("Failed:", errorInfo);
-};
+      navigate("/");
+    } catch (error: any) {
+      console.error("An error occurred while fetching user data:", error);
+    }
+  };
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
 
   return (
     <div className="w-full h-full flex justify-center mt-40">
@@ -89,7 +81,6 @@ const onFinishFailed = (errorInfo : any) => {
               placeholder="Parol"
             />
           </Form.Item>
-          
 
           <div className="flex items-center justify-end">
             <Button type="primary" htmlType="submit" className="w-fit">
@@ -99,5 +90,5 @@ const onFinishFailed = (errorInfo : any) => {
         </Form>
       </div>
     </div>
-  )
+  );
 }

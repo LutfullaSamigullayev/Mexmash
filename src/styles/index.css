@@ -17,3 +17,25 @@
 .ant-table-cell {
   @apply p-1 !important
 }
+
+.ant-card-body {
+  @apply py-2 !important
+}
+
+/* body {
+  background: linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147));
+}
+
+.ant-menu-root, .ant-input-wrapper, .ant-input-group-addon {
+  @apply bg-inherit !important
+}
+
+.ant-input-affix-wrapper{
+
+  @apply bg-[#C1E899]
+}
+.ant-input-search-button {
+
+  @apply bg-[#94DEA5]
+} */
+

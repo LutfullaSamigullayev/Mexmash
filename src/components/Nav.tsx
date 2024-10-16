@@ -7,61 +7,63 @@ import {
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import type { MenuProps } from 'antd';
+import type { MenuProps } from "antd";
 import { Button, Menu } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Icons } from "./Icons";
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>["items"][number];
 
-const items : MenuItem[] = [
+const items: MenuItem[] = [
   {
-    key: "1",
+    key: "/",
     icon: <PieChartOutlined />,
     label: <Link to={"/"}>Asosiy</Link>,
   },
   {
-    key: "2",
+    key: "users",
     icon: <UserOutlined />,
     label: <Link to={"/users"}>Foydalanuvchilar</Link>,
   },
   {
-    key: "3",
+    key: "products",
     icon: <ShoppingCartOutlined />,
     label: <Link to={"/products"}>Maxsulotlar</Link>,
   },
   {
-    key: "4",
+    key: "cart",
     icon: <ContainerOutlined />,
     label: <Link to={"/cart"}>Buyurtmalar</Link>,
   },
 ];
+
 export function Nav() {
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
+
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
-    <div
-      className="w-fit border border-red-500 "
-      style={
-        {
-          // width: 256,
-        }
-      }
-    >
-      <Button
+    <div className="max-w-48 h-full flex flex-col transition-all ease-in duration-700">
+      <div className="relative">
+        <div className="flex items-center gap-2  p-2 pl-4 ">
+        <Icons.logo2 width={40} />
+        {collapsed ? null : 'Mexmash'}
+        </div>
+        <Button
         type="text"
         onClick={toggleCollapsed}
-        style={{
-          marginBottom: 16,
-        }}
+        className="absolute -right-6 bottom-2"
       >
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
+      </div>
       <Menu
-        className="border border-red-500"
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
+        className=""
+        defaultSelectedKeys={[currentPath === "/" ? "/" : currentPath.slice(1)]}
         mode="inline"
         theme="light"
         inlineCollapsed={collapsed}

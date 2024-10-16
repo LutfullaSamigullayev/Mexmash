@@ -4,24 +4,15 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { Axios } from "@/lib/axios";
 import { RootState } from "@/redux/store";
-import { useSelector } from "react-redux";
-
-interface DataType {
-  id: number;
-  key: number; // Qo'shilgan maydon
-  name: string;
-  price: number;
-  realPrice: number;
-  imageUrl: string;
-}
-
+import { useDispatch, useSelector } from "react-redux";
+import { DataType } from "@/types";
+import { updateProductStats } from "@/redux/slices/productStatsSlice";
 
 const columns: TableProps<DataType>["columns"] = [
   {
     title: "№",
-    // dataIndex: "id",
     key: "id",
-    render: (_, __, index) => index + 1, // index dan foydalanamiz
+    render: (_, __, index) => index + 1,
   },
   {
     title: "Name",
@@ -42,9 +33,7 @@ const columns: TableProps<DataType>["columns"] = [
     title: "Image",
     dataIndex: "imageUrl",
     key: "imageUrl",
-    render: (text: string) => (
-      <img src={text} alt={text} style={{ width: 40 }} />
-    ),
+    render: (text: string) => <img src={text} alt={text} className="w-10" />,
   },
   {
     title: "Action",
@@ -63,11 +52,12 @@ const columns: TableProps<DataType>["columns"] = [
 ];
 
 export const Products: React.FC = () => {
+  const dispatch = useDispatch();
   const [products, setProducts] = useState<DataType[]>([]);
 
   let search: string | null = useSelector(
     (state: RootState) => state.search.query
-  ); 
+  );
 
   async function getProducts() {
     try {
@@ -79,7 +69,7 @@ export const Products: React.FC = () => {
         })
       );
       setProducts(data);
-      // console.log(data);
+      dispatch(updateProductStats(data)); // Dispatching the action with fetched products
     } catch (error: any) {
       console.error("An error occurred while fetching user data:", error);
     }
@@ -97,10 +87,7 @@ export const Products: React.FC = () => {
 
   return (
     <div className="p-3">
-      <Table<DataType>
-        columns={columns}
-        dataSource={filteredProducts}
-      />
+      <Table<DataType> columns={columns} dataSource={filteredProducts} />
     </div>
   );
 };

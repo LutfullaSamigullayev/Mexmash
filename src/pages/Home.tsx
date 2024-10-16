@@ -4,9 +4,9 @@ import { Nav } from "../components/Nav";
 
 export function Home() {
   return (
-    <div className="flex">
+    <div className="flex h-full">
       <Nav />
-      <div className="flex-auto border border-blue-700">
+      <div className="flex-auto">
         <Header />
         <Outlet />
       </div>

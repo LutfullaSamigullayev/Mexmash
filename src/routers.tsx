@@ -4,21 +4,10 @@ import { Login } from "./pages/Login";
 import { Main } from "./pages/Main";
 import { Products } from "./pages/Products";
 import { Users } from "./pages/Users";
-
-interface TRoute {
-  id: number;
-  path: string;
-  element: React.ReactNode;
-  children?: TRoute[];
-}
-
-interface TRoutes {
-  public: TRoute[];
-  private: TRoute[];
-}
+import { TRoutes } from "./types";
 
 export const routes: TRoutes = {
-  public:  [{ id:1, path: "login", element: <Login /> }],
+  public: [{ id: 1, path: "login", element: <Login /> }],
   private: [
     {
       id: 1,
@@ -48,4 +37,4 @@ export const routes: TRoutes = {
       ],
     },
   ],
-}
+};
