@@ -5,7 +5,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: ProductStatsState = {
   count: 0,
-  minPrice: null,
+  minPrice: 0,
   totalRealPrice: 0,
 };
 

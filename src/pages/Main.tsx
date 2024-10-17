@@ -7,11 +7,22 @@ import { updateProductStats } from "@/redux/slices/productStatsSlice";
 import { Axios } from "@/lib/axios";
 import { updateUserStats } from "@/redux/slices/userStatsSlice";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export function Main() {
+
+  // const lang = useSelector((state) => state.lang)
+  const lang = useSelector((state: { lang: { lang: string } }) => state.lang.lang);
+
+
   const dispatch = useDispatch()
 
-  
+  const { t, i18n } = useTranslation()
+
+  useEffect(() => {
+    i18n.changeLanguage(lang)
+  }, [lang])
+
 
   async function getProducts() {
     try {
@@ -51,19 +62,19 @@ export function Main() {
   );
 
   return (
-    <div className="flex flex-wrap gap-x-4 gap-y-2 p-3">
+    <div className="flex flex-wrap gap-x-4 gap-y-2 p-3 text-white">
       <CardMain
         id={1}
         bg={"bg-gradient-to-tr from-purple-900 to-blue-500"}
-        name={`Mahsulotlar ro'yxati`}
+        name={t('Number_of_products')}
         count={productStats.count}
-        desc={"Barcha mahsulotlar"}
+        desc={t("All_products")}
         icon={<ContainerOutlined />}
       />
       <CardMain
         id={2}
         bg={"bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%"}
-        name={`Boshlang'ich narxi`}
+        name={t("Starting_price")}
         count={productStats.minPrice}
         desc={"Boshlang'ich narx"}
         icon={<FallOutlined />}

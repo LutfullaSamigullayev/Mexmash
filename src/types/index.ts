@@ -1,5 +1,9 @@
 import { ComponentProps } from "react";
 
+export interface ThemeState {
+  theme: 'light' | 'dark';
+}
+
 export interface TRoute {
   id: number;
   path: string;

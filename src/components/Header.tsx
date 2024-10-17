@@ -1,23 +1,57 @@
-import { Button, Select, Space, Input } from "antd";
+import { Button, Select, Space } from "antd";
 import { GlobalOutlined, SunOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Dispatch } from "redux"; // Redux dispatch uchun
 import { useDispatch } from "react-redux"; // Redux dispatch uchun hook
-import { setSearch } from "@/redux/slices/searchSlice"; // O'zgaruvchi yo'lini moslashtiring
 import { useNavigate } from "react-router-dom";
+// import { setTheme } from "@/redux/slices/themaSlice";
+import { useEffect, useState } from "react";
+import { setLang } from "@/redux/slices/langSlice";
 
 export function Header() {
   const dispatch: Dispatch = useDispatch(); // Redux dispatch
   const navigate = useNavigate();
 
+  const [theme, setTheme] = useState(() => {
+    const mode = localStorage.getItem("theme");
+    return mode || "light";
+  });
 
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+  // const theme = useSelector((state: { theme: { theme: string } }) => state.theme.theme);
+
+  // const toggleTheme = () => {
+  //     dispatch(setTheme(theme == 'light' ? "dark" : "light"))
+  //   }
+
+  //   const theme = localStorage.getItem("theme")
+
+  // useEffect(() => {
+  //   const savedTheme = localStorage.getItem('theme');
+  //   if (savedTheme === 'light' || savedTheme === 'dark') {
+  //     dispatch(setTheme(savedTheme)); // To'g'ri qiymat bo'lsa, faqat ularni uzatamiz
+  //   } else {
+  //     dispatch(setTheme("light")); // Default tema
+  //   }
+  // }, [dispatch]);
+
+  const toggleTheme = () => {
+    setTheme((changeTheme) => {
+      console.log(changeTheme);
+      const newTheme = changeTheme === "light" ? "dark" : "light";
+      localStorage.setItem("theme", newTheme); // Yangi tema saqlanadi
+      return newTheme;
+    });
   };
 
-  const { Search } = Input;
+  useEffect(() => {
+    document.body.className = theme;
+    // // Tema o'zgarganda uni localStorage ga saqlash
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
-  const onSearch = (value: string) => {
-    dispatch(setSearch(value));
+  // const setThema = useSelector<RootState, ThemeState>((state) => state.theme)
+
+  const handleChange = (value: string) => {
+    dispatch(setLang(value));
   };
 
   const logout = () => {
@@ -26,20 +60,7 @@ export function Header() {
   };
 
   return (
-
-
-    <div className="w-full flex justify-between p-3 pl-7 shadow-sm">
-      <Search
-        placeholder="Izlash..."
-        allowClear
-        onChange={(e) => {
-          dispatch(setSearch(e.target.value));
-        }}
-        onSearch={onSearch}
-        style={{
-          width: 400,
-        }}
-      />
+    <div className="w-full flex justify-end p-3 pl-7 shadow-sm">
       <div className="flex gap-2">
         <Space wrap>
           <Select
@@ -54,7 +75,7 @@ export function Header() {
             ]}
           />
         </Space>
-        <Button>
+        <Button onClick={toggleTheme}>
           <SunOutlined />
         </Button>
         <a href="#">
