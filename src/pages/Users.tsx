@@ -34,7 +34,6 @@ export const Users: React.FC = () => {
         <>
           <Button
             className="mx-1 rounded-full"
-            type="primary"
             onClick={() => {
               showModal();
               setEditUser(item.id);
@@ -47,7 +46,6 @@ export const Users: React.FC = () => {
           </Button>
           <Button
             className="mx-1 rounded-full"
-            type="primary"
             onClick={() => setDeleteUser(item.id)}
           >
             <DeleteOutlined />

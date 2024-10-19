@@ -4,6 +4,7 @@ import searchSlice  from "@/redux/slices/searchSlice" // Sizning search slice yo
 import productStatsSlice from "./slices/productStatsSlice";
 import userStatsSlice from "./slices/userStatsSlice";
 import langSlice from "./slices/langSlice";
+import darkSlice from "./slices/darkSlice";
 // import themeSlice from "./slices/themaSlice";
 // import localStorage from "redux-persist/es/storage";
 
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   productStats: productStatsSlice,
   userStats: userStatsSlice,
   lang: langSlice,
+  dark: darkSlice,
   // theme: themeSlice,
   // Boshqa reducerlar qo'shishingiz mumkin
 });

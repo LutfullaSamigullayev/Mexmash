@@ -14,7 +14,6 @@
 //     setTheme(state, action: PayloadAction<'light' | 'dark'>) {
 //       state.theme = action.payload;
 //     },
-
 //   },
 // });
 

@@ -1,20 +1,22 @@
 import { Button, Select, Space } from "antd";
 import { GlobalOutlined, SunOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Dispatch } from "redux"; // Redux dispatch uchun
-import { useDispatch } from "react-redux"; // Redux dispatch uchun hook
+import { useDispatch, useSelector } from "react-redux"; // Redux dispatch uchun hook
 import { useNavigate } from "react-router-dom";
 // import { setTheme } from "@/redux/slices/themaSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { setLang } from "@/redux/slices/langSlice";
+import { toggleDarkMode } from "@/redux/slices/darkSlice";
+import { RootState } from "@/redux/store";
 
 export function Header() {
   const dispatch: Dispatch = useDispatch(); // Redux dispatch
   const navigate = useNavigate();
 
-  const [theme, setTheme] = useState(() => {
-    const mode = localStorage.getItem("theme");
-    return mode || "light";
-  });
+  // const [theme, setTheme] = useState(() => {
+  //   const mode = localStorage.getItem("theme");
+  //   return mode || "light";
+  // });
 
   // const theme = useSelector((state: { theme: { theme: string } }) => state.theme.theme);
 
@@ -33,31 +35,59 @@ export function Header() {
   //   }
   // }, [dispatch]);
 
-  const toggleTheme = () => {
-    setTheme((changeTheme) => {
-      console.log(changeTheme);
-      const newTheme = changeTheme === "light" ? "dark" : "light";
-      localStorage.setItem("theme", newTheme); // Yangi tema saqlanadi
-      return newTheme;
-    });
-  };
+  // const toggleTheme = () => {
+  //   setTheme((changeTheme) => {
+  //     console.log(changeTheme);
+  //     const newTheme = changeTheme === "light" ? "dark" : "light";
+  //     localStorage.setItem("theme", newTheme); // Yangi tema saqlanadi
+  //     return newTheme;
+  //   });
+  // }; 
 
-  useEffect(() => {
-    document.body.className = theme;
-    // // Tema o'zgarganda uni localStorage ga saqlash
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  // useEffect(() => {
+  //   document.body.className = theme;
+  //   // // Tema o'zgarganda uni localStorage ga saqlash
+  //   localStorage.setItem("theme", theme);
+  // }, [theme]);
 
   // const setThema = useSelector<RootState, ThemeState>((state) => state.theme)
 
-  const handleChange = (value: string) => {
+  const isDarkMode = useSelector((state: RootState ) => state.dark.isDarkMode);
+
+  const localStorageTheme = localStorage.getItem('theme')
+
+  console.log( "localStorageTheme", localStorageTheme)
+  
+  const newMode = isDarkMode == 'dark' ? 'light' : "dark";
+  
+  
+  
+  useEffect(() => {
+    console.log(isDarkMode)
+    console.log(newMode)
+    dispatch(toggleDarkMode(localStorageTheme == "dark" ? "dark" : "light"));
+    localStorageTheme == "dark" ? document.body.classList.add('dark') : null;
+
+  }, [localStorageTheme])
+
+
+  const clickSetLang = (value: string) => {
     dispatch(setLang(value));
   };
 
   const logout = () => {
     localStorage.clear();
+    window.location.reload()
     return navigate("/login");
   };
+
+ 
+  const clickDarkMode = () => {
+    dispatch(toggleDarkMode(newMode));
+    document.body.classList.toggle('dark');
+    localStorage.setItem('theme', newMode)
+  }
+ 
 
   return (
     <div className="w-full flex justify-end p-3 pl-7 shadow-sm">
@@ -67,7 +97,7 @@ export function Header() {
             className="w-fit"
             defaultValue="uz"
             suffixIcon={<GlobalOutlined />}
-            onChange={handleChange}
+            onChange={clickSetLang}
             options={[
               { value: "uz", label: "Uz" },
               { value: "ru", label: "Ru" },
@@ -75,7 +105,7 @@ export function Header() {
             ]}
           />
         </Space>
-        <Button onClick={toggleTheme}>
+        <Button onClick={clickDarkMode}>
           <SunOutlined />
         </Button>
         <a href="#">

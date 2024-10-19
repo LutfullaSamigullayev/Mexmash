@@ -56,7 +56,7 @@ export const Products: React.FC = () => {
         <>
           <Button
             className="mx-1 rounded-full"
-            type="primary"
+            // type="primary"
             onClick={() => {
               setEditProduct(item.id);
               setIsModalOpen(true);
@@ -70,7 +70,7 @@ export const Products: React.FC = () => {
           </Button>
           <Button
             className="mx-1 rounded-full"
-            type="primary"
+            // type="primary"
             onClick={() => setDeleteProduct(item.id)}
           >
             <DeleteOutlined />
@@ -178,7 +178,7 @@ export const Products: React.FC = () => {
     <div className="p-3">
       <div className="flex p-2 justify-between">
         <h2 className="font-bold">Mahsulotlar ro'yxati</h2>
-        <Button className="rounded-full" type="primary" onClick={showModal}>
+        <Button className="rounded-full" onClick={showModal}>
           Mahsulot qo'shish
           <PlusCircleOutlined />
         </Button>

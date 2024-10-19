@@ -1,7 +1,7 @@
 import { ComponentProps } from "react";
 
 export interface ThemeState {
-  theme: 'light' | 'dark';
+  isDarkMode: 'light' | 'dark';
 }
 
 export interface TRoute {
