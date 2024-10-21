@@ -13,8 +13,19 @@ import { DataType } from "@/types";
 import { updateProductStats } from "@/redux/slices/productStatsSlice";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import { SearchName } from "@/components/SearchName";
+import { useTranslation } from "react-i18next";
 
 export const Products: React.FC = () => {
+
+  const lang = useSelector(
+    (state: { lang: { lang: string } }) => state.lang.lang
+  );
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang]);
+
   const dispatch = useDispatch();
   const [products, setProducts] = useState<DataType[]>([]);
   const [editProduct, setEditProduct] = useState<number | null>(null);
@@ -29,28 +40,28 @@ export const Products: React.FC = () => {
       render: (_, __, index) => index + 1,
     },
     {
-      title: "Name",
+      title: t("Name"),
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Price",
+      title: t("Price"),
       dataIndex: "price",
       key: "price",
     },
     {
-      title: "Real Price",
+      title: t("Real")+' '+t("Price"),
       dataIndex: "realPrice",
       key: "realPrice",
     },
     {
-      title: "Image",
+      title: t("Image"),
       dataIndex: "imageUrl",
       key: "imageUrl",
       render: (text: string) => <img src={text} alt={text} className="w-10" />,
     },
     {
-      title: "Action",
+      title: t("Action"),
       key: "action",
       render: (item) => (
         <>
@@ -175,9 +186,9 @@ export const Products: React.FC = () => {
   };
 
   return (
-    <div className="p-3">
+    <div className="p-3 ">
       <div className="flex p-2 justify-between">
-        <h2 className="font-bold">Mahsulotlar ro'yxati</h2>
+        <h2 className="font-bold">{t("List_of_products")}</h2>
         <Button className="rounded-full" onClick={showModal}>
           Mahsulot qo'shish
           <PlusCircleOutlined />
@@ -186,7 +197,7 @@ export const Products: React.FC = () => {
       <SearchName />
       <Table<DataType> columns={columns} dataSource={filteredProducts} />
       <Modal
-        title={editProduct ? "Tahrirlash" : "Mahsulot qo'shish"}
+        title={editProduct ? t("Editing") : t("Add_product")}
         open={isModalOpen}
         onCancel={handleCancel}
         footer={null}
@@ -196,7 +207,7 @@ export const Products: React.FC = () => {
             control={control}
             name="name"
             render={({ field }) => (
-              <Input className="w-96" placeholder="Nomni kiriting" {...field} />
+              <Input className="w-96" placeholder={t("Enter_the_name")} {...field} />
             )}
           />
           <Controller
@@ -206,7 +217,7 @@ export const Products: React.FC = () => {
               <InputNumber<number>
                 className="w-96"
                 type="number"
-                placeholder="Narxni kiriting"
+                placeholder={t("Enter_the_price")}
                 {...field}
               />
             )}
@@ -217,7 +228,7 @@ export const Products: React.FC = () => {
             render={({ field }) => (
               <InputNumber<number>
                 className="w-96"
-                placeholder="Haqiqiy narxni kiriting"
+                placeholder={t("Enter_the_real_price")}
                 {...field}
               />
             )}
@@ -228,13 +239,13 @@ export const Products: React.FC = () => {
             render={({ field }) => (
               <Input
                 className="w-96"
-                placeholder="Rasm URL sini kiriting"
+                placeholder={t("Enter_the_image_URL")}
                 {...field}
               />
             )}
           />
           <Button htmlType="submit" type="primary">
-            {editProduct ? "Tahrirlash" : "Mahsulot qo'shish"}
+            {editProduct ? t("Editing") : t("Add_product")}
           </Button>
         </Form>
       </Modal>
@@ -242,14 +253,14 @@ export const Products: React.FC = () => {
         width={200}
         centered={true}
         open={deleteProduct !== null}
-        okText="Ha"
-        cancelText="Yo'q"
+        okText={t("Yes")}
+        cancelText={t("No")}
         onOk={onDeleteProduct}
         onCancel={() => {
           setDeleteProduct(null);
         }}
       >
-        O'chirilsinmi?
+        {t("Delete")}?
       </Modal>
     </div>
   );

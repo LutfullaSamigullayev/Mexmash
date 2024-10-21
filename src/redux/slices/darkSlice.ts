@@ -1,5 +1,5 @@
-import { ThemeState } from '@/types';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ThemeState } from "@/types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // interface DarkState {
 //     isDarkMode: boolean; // Hozirgi til (default: 'uz')
@@ -10,12 +10,12 @@ const initialState: ThemeState = {
 };
 
 const darkSlice = createSlice({
-  name: 'dark',
+  name: "dark",
   initialState,
   reducers: {
-    toggleDarkMode(state, action: PayloadAction<'light' | 'dark'>) {
-            state.isDarkMode = action.payload;
-          },
+    toggleDarkMode(state, action: PayloadAction<"light" | "dark">) {
+      state.isDarkMode = action.payload;
+    },
   },
 });
 

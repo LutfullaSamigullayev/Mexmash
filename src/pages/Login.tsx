@@ -4,15 +4,12 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 // import { User} from '@/types';
 import { useNavigate } from "react-router-dom";
 import { Axios } from "@/lib/axios";
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
 
 export function Login() {
   type LoginValues = {
     login: string;
     password: string;
   };
-  const dispatch: Dispatch = useDispatch(); // Redux dispatch
 
   const navigate = useNavigate();
 
@@ -26,7 +23,8 @@ export function Login() {
 
       localStorage.setItem("refresh_token", data.data.refresh_token);
       localStorage.setItem("access_token", data.data.access_token);
-      localStorage.setItem('theme', 'light')
+      localStorage.setItem("theme", "light");
+      localStorage.setItem("lang", "uz");
 
 
       navigate("/");

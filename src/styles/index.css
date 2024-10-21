@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-    @apply m-0 p-0 box-border
+  @apply m-0 p-0 box-border;
 }
 
 @layer base {
@@ -20,8 +20,8 @@
 }
 
 .dark {
-  --background-color: #000;
-  --color: #fff
+  --background-color: #141414;
+  --color: #fff;
 }
 
 body {
@@ -34,13 +34,12 @@ body {
 }
 
 .ant-table-cell {
-  @apply p-1 !important
+  @apply p-1 !important;
 }
 
 .ant-card-body {
-  @apply py-2 !important
+  @apply py-2 !important;
 }
-
 
 /* body {
   background: linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147));
@@ -58,4 +57,3 @@ body {
 
   @apply bg-[#94DEA5]
 } */
-

@@ -1,7 +1,7 @@
 import { ComponentProps } from "react";
 
 export interface ThemeState {
-  isDarkMode: 'light' | 'dark';
+  isDarkMode: "light" | "dark";
 }
 
 export interface TRoute {
@@ -52,7 +52,6 @@ export interface UserType {
   telegramID: string;
   refresh_token: string | null;
 }
-
 
 export interface SearchState {
   query: string;

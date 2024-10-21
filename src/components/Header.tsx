@@ -42,7 +42,7 @@ export function Header() {
   //     localStorage.setItem("theme", newTheme); // Yangi tema saqlanadi
   //     return newTheme;
   //   });
-  // }; 
+  // };
 
   // useEffect(() => {
   //   document.body.className = theme;
@@ -52,42 +52,39 @@ export function Header() {
 
   // const setThema = useSelector<RootState, ThemeState>((state) => state.theme)
 
-  const isDarkMode = useSelector((state: RootState ) => state.dark.isDarkMode);
+  const isDarkMode = useSelector((state: RootState) => state.dark.isDarkMode);
 
-  const localStorageTheme = localStorage.getItem('theme')
+  const localStorageTheme = localStorage.getItem("theme");
 
-  console.log( "localStorageTheme", localStorageTheme)
-  
-  const newMode = isDarkMode == 'dark' ? 'light' : "dark";
-  
-  
-  
+  const localStorageLang = localStorage.getItem("lang")
+
+  const newMode = isDarkMode == "dark" ? "light" : "dark";
+
   useEffect(() => {
-    console.log(isDarkMode)
-    console.log(newMode)
     dispatch(toggleDarkMode(localStorageTheme == "dark" ? "dark" : "light"));
-    localStorageTheme == "dark" ? document.body.classList.add('dark') : null;
-
-  }, [localStorageTheme])
-
+    localStorageTheme == "dark" ? document.body.classList.add("dark") : null;
+    if(localStorageLang) {
+      dispatch(setLang(localStorageLang))
+    }
+  }, [localStorageTheme, localStorageLang]);
 
   const clickSetLang = (value: string) => {
     dispatch(setLang(value));
+    localStorage.setItem("lang", value)
+    console.log(value)
   };
 
   const logout = () => {
     localStorage.clear();
-    window.location.reload()
+    window.location.reload();
     return navigate("/login");
   };
 
- 
   const clickDarkMode = () => {
     dispatch(toggleDarkMode(newMode));
-    document.body.classList.toggle('dark');
-    localStorage.setItem('theme', newMode)
-  }
- 
+    document.body.classList.toggle("dark");
+    localStorage.setItem("theme", newMode);
+  };
 
   return (
     <div className="w-full flex justify-end p-3 pl-7 shadow-sm">
@@ -95,7 +92,7 @@ export function Header() {
         <Space wrap>
           <Select
             className="w-fit"
-            defaultValue="uz"
+            defaultValue={localStorageLang}
             suffixIcon={<GlobalOutlined />}
             onChange={clickSetLang}
             options={[

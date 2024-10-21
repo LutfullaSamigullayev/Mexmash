@@ -1,4 +1,12 @@
-import { Button, ConfigProvider, Form, Input, Modal, Table, InputNumber } from "antd";
+import {
+  Button,
+  ConfigProvider,
+  Form,
+  Input,
+  Modal,
+  Table,
+  InputNumber,
+} from "antd";
 import type { TableProps } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
@@ -9,8 +17,19 @@ import { updateUserStats } from "@/redux/slices/userStatsSlice";
 import { UserType } from "@/types";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import { SearchName } from "@/components/SearchName";
+import { useTranslation } from "react-i18next";
 
 export const Users: React.FC = () => {
+  const lang = useSelector(
+    (state: { lang: { lang: string } }) => state.lang.lang
+  );
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang]);
+
+
   const columns: TableProps<UserType>["columns"] = [
     {
       title: "№",
@@ -18,17 +37,17 @@ export const Users: React.FC = () => {
       render: (_, __, index) => index + 1,
     },
     {
-      title: "Username",
+      title: t("User_name"),
       dataIndex: "username",
       key: "username",
     },
     {
-      title: "Phone",
+      title: t("Phone_number"),
       dataIndex: "phone",
       key: "phone",
     },
     {
-      title: "Action",
+      title: t("Action"),
       key: "action",
       render: (item) => (
         <>
@@ -54,6 +73,8 @@ export const Users: React.FC = () => {
       ),
     },
   ];
+
+ 
 
   // const theme = localStorage.getItem('theme')
 
@@ -152,14 +173,14 @@ export const Users: React.FC = () => {
   return (
     <div className="p-3">
       <div className="flex p-2 pb-4">
-        <h2 className="font-bold">Foydalanuvchilar ro'yxati</h2>
+        <h2 className="font-bold">{t("List_of_users")}</h2>
       </div>
       <SearchName />
 
       <ConfigProvider
         theme={{
           token: {
-            // colorBgContainer: '#454343', 
+            // colorBgContainer: '#454343',
             // colorText: '#fff',
           },
         }}
@@ -168,7 +189,7 @@ export const Users: React.FC = () => {
       </ConfigProvider>
 
       <Modal
-        title={"Tahrirlash"}
+        title={t("Editing")}
         open={isModalOpen}
         onCancel={handleCancel}
         footer={null}
@@ -180,7 +201,7 @@ export const Users: React.FC = () => {
             render={({ field }) => (
               <Input
                 className="w-96"
-                placeholder="Nomini kiriting"
+                placeholder={t("Enter_the_name")}
                 {...field}
               />
             )}
@@ -198,7 +219,7 @@ export const Users: React.FC = () => {
             )}
           />
           <Button htmlType="submit" type="primary">
-            Tahrirlash
+          {t("Editing")}
           </Button>
         </Form>
       </Modal>
@@ -206,14 +227,14 @@ export const Users: React.FC = () => {
         width={200}
         centered={true}
         open={deleteUser !== null}
-        okText="Ha"
-        cancelText="Yo'q"
+        okText={t("Yes")}
+        cancelText={t("No")}
         onOk={onDeleteUser}
         onCancel={() => {
           setDeleteUser(null);
         }}
       >
-        O'chirilsinmi?
+        {t("Delete")}?
       </Modal>
     </div>
   );
