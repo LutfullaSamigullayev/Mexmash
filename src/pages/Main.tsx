@@ -75,7 +75,7 @@ export function Main() {
         name={t("Number_of_products")}
         count={productStats.count}
         desc={t("All_products")}
-        icon={<ContainerOutlined />}
+        icon={<ContainerOutlined  style={{ fontSize: '220%'}} />}
       />
       <CardMain
         id={2}
@@ -85,7 +85,7 @@ export function Main() {
         name={t("Starting_price")}
         count={productStats.minPrice}
         desc={t("Starting_price")}
-        icon={<FallOutlined />}
+        icon={<FallOutlined style={{ fontSize: '220%'}} />}
       />
       <CardMain
         id={3}
@@ -93,7 +93,7 @@ export function Main() {
         name={t("Total_amount")}
         count={productStats.totalRealPrice}
         desc={t("Total_amount")}
-        icon={<MoneyCollectOutlined />}
+        icon={<MoneyCollectOutlined style={{ fontSize: '220%'}} />}
       />
       <CardMain
         id={4}
@@ -101,7 +101,7 @@ export function Main() {
         name={t("Number_of_users")}
         count={userStats.count}
         desc={t("Number_of_users")}
-        icon={<UserOutlined />}
+        icon={<UserOutlined style={{ fontSize: '220%'}} />}
       />
     </div>
   );

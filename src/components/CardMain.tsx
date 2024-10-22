@@ -7,7 +7,7 @@ const CardMain = (props: CardProps) => (
     theme={{
       token: {
         /* here is your global tokens */
-        colorText: '#fff'
+        colorText: "#fff",
       },
     }}
   >
@@ -17,9 +17,13 @@ const CardMain = (props: CardProps) => (
       bordered={false}
       className={clsx(`w-72 h-40 ${props.bg}`)}
     >
-      <h1 className="text-3xl">{props.count}</h1>
-      <p>{props.desc}</p>
-      {props.icon}
+      <div className="flex h-20 items-center">
+        <div className="flex flex-col flex-auto gap-4">
+          <h1 className="text-3xl">{props.count}</h1>
+          <p>{props.desc}</p>
+        </div>
+        <div className="w-10">{props.icon}</div>
+      </div>
     </Card>
   </ConfigProvider>
 );

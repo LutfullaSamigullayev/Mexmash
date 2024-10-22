@@ -16,7 +16,6 @@ import { SearchName } from "@/components/SearchName";
 import { useTranslation } from "react-i18next";
 
 export const Products: React.FC = () => {
-
   const lang = useSelector(
     (state: { lang: { lang: string } }) => state.lang.lang
   );
@@ -50,7 +49,7 @@ export const Products: React.FC = () => {
       key: "price",
     },
     {
-      title: t("Real")+' '+t("Price"),
+      title: t("Real") + " " + t("Price"),
       dataIndex: "realPrice",
       key: "realPrice",
     },
@@ -189,12 +188,15 @@ export const Products: React.FC = () => {
     <div className="p-3 ">
       <div className="flex p-2 justify-between">
         <h2 className="font-bold">{t("List_of_products")}</h2>
+        <SearchName />
+        <div className="">
         <Button className="rounded-full" onClick={showModal}>
-          Mahsulot qo'shish
+          {t("Add_product")}
           <PlusCircleOutlined />
         </Button>
+
+        </div>
       </div>
-      <SearchName />
       <Table<DataType> columns={columns} dataSource={filteredProducts} />
       <Modal
         title={editProduct ? t("Editing") : t("Add_product")}
@@ -207,7 +209,11 @@ export const Products: React.FC = () => {
             control={control}
             name="name"
             render={({ field }) => (
-              <Input className="w-96" placeholder={t("Enter_the_name")} {...field} />
+              <Input
+                className="w-96"
+                placeholder={t("Enter_the_name")}
+                {...field}
+              />
             )}
           />
           <Controller

@@ -34,6 +34,7 @@ i18n.use(initReactI18next).init({
                 Users: "Foydalanuvchilar",
                 Products: "Maxsulotlar",
                 Orders: "Buyurtmalar",
+                Search: "Izlash",
                 
             }
         },
@@ -66,6 +67,7 @@ i18n.use(initReactI18next).init({
                 Users: "Users",
                 Products: "Products",
                 Orders: "Orders",
+                Search: "Search",
 
             }
         },
@@ -73,7 +75,7 @@ i18n.use(initReactI18next).init({
             translation: {
                 Number_of_products: "Количество продуктов",
                 All_products: "Все продукты",
-                Starting_price: "Boshlang'ich narxi",
+                Starting_price: "Начальная цена",
                 Total_amount: "Общая сумма",
                 Number_of_users: "Количество пользователей",
                 User_name: "Имя пользователя",
@@ -98,6 +100,7 @@ i18n.use(initReactI18next).init({
                 Users: "Пользователи",
                 Products: "Продукты",
                 Orders: "Заказы",
+                Search: "Поиск",
 
             }
         }

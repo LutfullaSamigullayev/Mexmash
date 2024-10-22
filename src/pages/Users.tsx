@@ -172,10 +172,11 @@ export const Users: React.FC = () => {
 
   return (
     <div className="p-3">
-      <div className="flex p-2 pb-4">
-        <h2 className="font-bold">{t("List_of_users")}</h2>
+      <div className="flex justify-between p-2 pb-4 ">
+        <h2 className="font-bold basis-1/3">{t("List_of_users")}</h2>
+        <SearchName />
+        <div className="basis-1/3"></div>
       </div>
-      <SearchName />
 
       <ConfigProvider
         theme={{

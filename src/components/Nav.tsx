@@ -61,7 +61,7 @@ export function Nav() {
 
 
   return (
-    <div className={`flex flex-col ${collapsed ? 'w-20' : 'w-48'} h-full transition-all ease-in duration-300`}>
+    <div className={`flex flex-col ${collapsed ? 'w-20' : 'w-48'} h-full transition-all ease-in duration-300 `}>
       <div className="relative">
         <div className="flex items-center gap-2  p-2 pl-4 ">
         <Icons.logo2 width={40} />
@@ -70,7 +70,7 @@ export function Nav() {
         <Button
         type="text"
         onClick={toggleCollapsed}
-        className="absolute -right-6 bottom-2 "
+        className="absolute -right-6 bottom-2"
       >
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
