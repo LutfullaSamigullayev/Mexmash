@@ -92,7 +92,7 @@ export function Header() {
         <Space wrap>
           <Select
             className="w-fit"
-            defaultValue={localStorageLang}
+            defaultValue={localStorageLang || "uz"}
             suffixIcon={<GlobalOutlined />}
             onChange={clickSetLang}
             options={[
@@ -105,13 +105,13 @@ export function Header() {
         <Button onClick={clickDarkMode}>
           <SunOutlined />
         </Button>
-        <a href="#">
+        {/* <a href="#">
           <img
             src="/public/person.png"
             alt="person"
             className="w-8 h-8 rounded-full"
           />
-        </a>
+        </a> */}
         <Button onClick={logout} type="primary">
           <LogoutOutlined />
         </Button>
